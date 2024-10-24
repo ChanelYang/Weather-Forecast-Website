@@ -31,20 +31,20 @@ async function fetchWeatherFromBackend(lat, lon) {
 }
 
 //function to display the weather data on frontend client side
-function displayWeather(weatherData) {
+export function displayWeather(weatherData) {
     loadingElement.style.display = 'none'; //the loading message is hidden
     weatherDisplay.style.display = 'block'; //display the weather data
 
     //display weather details
-    locationElement.innerText = 'Location:  ${weatherData.name}, ${weatherData.sys.country}';
-    temperatureElement.innerText = 'Temperature: ${weatherData.main.temp} °C';
-    weatherDescElement.innerText = 'Conditions: ${weatherData.weather[0].description}';
+    locationElement.innerText = `Location:  ${weatherData.name}, ${weatherData.sys.country}`;
+    temperatureElement.innerText = `Temperature: ${weatherData.main.temp} °C`;
+    weatherDescElement.innerText = `Conditions: ${weatherData.weather[0].description}`;
 }
 
 //function to display sever weather warnings
 function displayWarning(alerts) {
     const warningMessage = alerts[0].description
-    warningElement.innerText = 'Severe weather warning: ${warningMessage}';
+    warningElement.innerText = `Severe weather warning: ${warningMessage}`;
 }
 
 //main function. get location and fetch data
