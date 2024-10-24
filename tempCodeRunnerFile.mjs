@@ -1,1 +1,0 @@
-import { displayWeather } from "./WeatherForecast.mjs";
