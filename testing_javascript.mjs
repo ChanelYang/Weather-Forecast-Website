@@ -1,4 +1,4 @@
-import { displayWeather } from "./WeatherForecast.js";
+import { displayWeather } from "./WeatherForecast.mjs";
 
 //dummy data
 const mockWeatherData = {
