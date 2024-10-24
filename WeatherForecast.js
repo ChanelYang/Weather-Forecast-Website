@@ -26,7 +26,41 @@ async function fetchWeatherFromBackend(lat, lon) {
             loadingElement.innerText = 'Fail to receive weather information.';
         }
     } catch (error) {
-
+        loadingElement.innerText = 'Error fetching weather data. Please report to the developers.';
     }
-
 }
+
+//function to display the weather data on frontend client side
+function displayWeather(weatherData) {
+    loadingElement.style.display = 'none'; //the loading message is hidden
+    weatherDisplay.style.display = 'block'; //display the weather data
+
+    //display weather details
+    locationElement.innerText = 'Location:  ${weatherData.name}, ${weatherData.sys.country}';
+    temperatureElement.innerText = 'Temperature: ${weatherData.main.temp} °C';
+    weatherDescElement.innerText = 'Conditions: ${weatherData.weather[0].description}';
+}
+
+//function to display sever weather warnings
+function displayWarning(alerts) {
+    const warningMessage = alerts[0].description
+    warningElement.innerText = 'Severe weather warning: ${warningMessage}';
+}
+
+//main function. get location and fetch data
+function getLocation() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(position => {
+            const lat = position.coords.latitude;
+            const lon = position.coords.longitude;
+
+            fetchWeatherFromBackend(lat, lon);
+        }, () => {
+            loadingElement,innerText = 'Unable to access your location.';
+        });
+    } else {
+        loadingElement.innerText = 'Geolocation is not supported.';
+    }
+}
+
+getLocation();
