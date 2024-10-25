@@ -1,5 +1,5 @@
 import { displayWeather } from "./WeatherForecast.mjs";
-
+import { displayWarning } from "./WeatherForecast.mjs";
 //dummy data
 const mockWeatherData = {
     name: "New York",
@@ -14,3 +14,5 @@ const mockAlerts = [
 
 console.log("Calling displayWeather");
 displayWeather(mockWeatherData);
+console.log("Calling displayWarning");
+displayWarning(mockAlerts);

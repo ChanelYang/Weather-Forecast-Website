@@ -3,19 +3,23 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Weather Test</title>
+  <title>Weather Forecast</title>
 </head>
 <body>
   <h1>Weather Forecast</h1>
 
-  <div>
+  <!-- Loading message while fetching weather data -->
+  <p id="loadingWeather">Fetching weather data...</p>
+
+  <!-- Weather data section, initially hidden -->
+  <div id="weatherDisplay" style="display: none;">
     <h2 id="location">Location will appear here</h2>
     <p id="temperature">Temperature will appear here</p>
     <p id="weatherDesc">Conditions will appear here</p>
-    <p id="warnings">Warnings will appear here</p>
+    <p id="warning">Warnings will appear here</p>
   </div>
 
- 
+  <!-- Include the external JavaScript file -->
   <script type="module" src="testing_javascript.mjs"></script>
 </body>
 </html>

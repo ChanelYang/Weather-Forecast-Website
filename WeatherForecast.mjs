@@ -42,7 +42,7 @@ export function displayWeather(weatherData) {
 }
 
 //function to display sever weather warnings
-function displayWarning(alerts) {
+export function displayWarning(alerts) {
     const warningMessage = alerts[0].description
     warningElement.innerText = `Severe weather warning: ${warningMessage}`;
 }
