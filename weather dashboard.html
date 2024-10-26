@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Weather dashboard</title>
+        <link rel="stylesheet" href ="weather css.css">
+    </head>
+    <body>
+        <h1>My HTML Page</h1>
+    </body>
+<div class="card">
+    <div class="search">
+        <input type="text" placeholder="Please enter city name"
+        spellcheck="false">
+        <button><img src="D:\Weather website\weather website\th.jpg"></button> 
+    </div>
+</div>
+</html>
+
+<script>
+    const apiKey = "6e52ae434ff8cf0b42aa085cdd9ea798"
+    const apiUrl = "https://api.openweathermap.org/data/2.5/weather?&units=metric"
+    const searchbox = document.querySelector(".search input");
+    const searchbotton = document.querySelector(".search botton");
+    const weatherIcon = document.querySelector("weather-icon")
+
+    async function checkWeather(city) {
+        const response= await fetch(apiUrl + city + "&appid={apiKey}");
+        var data = await response.json()
+
+        console.log(data);
+
+        document.querySelector(".city").innerHTML = data.name
+        document.querySelector(".temp").innerHTML = Math.round(data.main.temp) + "°C"
+        document.querySelector(".humidity").innerHTML = data.main.humidity + "%"
+        document.querySelector(".wind").innerHTML = data.wind.speed + "km/h"
+
+        
+
+    }
+    searchbotton.addEventListener("click",()=>{
+    checkWeather(searchbox.value);
+})
+</script>
