@@ -8,17 +8,25 @@ const loadingElement = document.getElementById('loadingWeather');
 
 //function to fetch weather data from python backend
 async function fetchWeatherFromBackend(lat, lon) {
-    const url = ' ';//need to add weather information backend url here
+    console.log("Calling fetch Weather from back end");
+    const url = 'http://localhost:5000/location';//need to add weather information backend url here
     
     try {
-        const response = await fetch(url); //fetch response from backend
+        const response = await fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({latitude: lat, longitude: lon})
+        }); //fetch response from backend
         const data = await response.json(); //convert the HTTP file received to JSON file
-    
+        console.log("response received from backend", data);
         if (response.ok) { //if the response is received
-            displayWeather(data.weather);
+            displayWeather(data);
 
-            if (data.alerts.length > 0) { //if severe weather alerts present
-                displayWarning(data.alerts);
+            if (data.warning && data.warning.length > 0) { 
+                console.log("got warning")//if severe weather alerts present
+                displayWarning(data.warning);
             }else {
                 warningElement.innerText = 'No severe weather warnings.'; //display no warnings
             }
@@ -32,6 +40,8 @@ async function fetchWeatherFromBackend(lat, lon) {
 
 //function to display the weather data on frontend client side
 export function displayWeather(weatherData) {
+    console.log("Calling displayWeather");
+    console.log(weatherData);
     loadingElement.style.display = 'none'; //the loading message is hidden
     weatherDisplay.style.display = 'block'; //display the weather data
 
@@ -39,17 +49,20 @@ export function displayWeather(weatherData) {
     locationElement.innerText = `Location:  ${weatherData.name}, ${weatherData.sys.country}`;
     temperatureElement.innerText = `Temperature: ${weatherData.main.temp} °C`;
     weatherDescElement.innerText = `Conditions: ${weatherData.weather[0].description}`;
+    
 }
 
 //function to display sever weather warnings
-export function displayWarning(alerts) {
-    const warningMessage = alerts[0].description
-    warningElement.innerText = `Severe weather warning: ${warningMessage}`;
+export function displayWarning(warning) {
+    console.log("calling get warning");
+    warningElement.innerText = warning;
 }
 
 //main function. get location and fetch data
 function getLocation() {
+    console.log("Calling get location");
     if (navigator.geolocation) {
+        console.log("accessed geolocation");
         navigator.geolocation.getCurrentPosition(position => {
             const lat = position.coords.latitude;
             const lon = position.coords.longitude;
