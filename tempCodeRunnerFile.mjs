@@ -39,7 +39,7 @@ async function fetchWeatherFromBackend(lat, lon) {
 }
 
 //function to display the weather data on frontend client side
-function displayWeather(weatherData) {
+export function displayWeather(weatherData) {
     console.log("Calling displayWeather");
     console.log(weatherData);
     loadingElement.style.display = 'none'; //the loading message is hidden
@@ -53,7 +53,7 @@ function displayWeather(weatherData) {
 }
 
 //function to display sever weather warnings
-function displayWarning(warning) {
+export function displayWarning(warning) {
     console.log("calling get warning");
     warningElement.innerText = warning;
 }

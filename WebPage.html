@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Dashboard</title>
+    <link rel="stylesheet" href="WebPageStyle.css">
+</head>
+<body>
+    <h1>Weather Dashboard</h1>
+
+    <div class="card">
+        <!-- Loading message -->
+        <div id="loadingWeather" class="info">Fetching weather data...</div>
+
+        <!-- Weather data display section -->
+        <div id="weatherDisplay" style="display:none;">
+            <h2 id="location" class="location">Location: </h2>
+            <p id="temperature" class="temp">Temperature: -- °C</p>
+            <p id="weatherDesc" class="conditions">Conditions: --</p>
+            <p id="warning" class="warning">No severe weather warnings.</p>
+        </div>
+    </div>
+
+    <script src="WeatherForecast.mjs"></script>
+</body>
+</html>
