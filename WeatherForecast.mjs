@@ -1,4 +1,4 @@
-//code by Chanel Yang. 2024.10.25
+//2024.10.25
 //References to HTML elements
 const locationElement = document.getElementById('location');
 const temperatureElement = document.getElementById('temperature');
@@ -19,7 +19,9 @@ async function fetchWeatherFromBackend(lat, lon) {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({latitude: lat, longitude: lon})
+        
         }); //initiate a fetch request to the URL
+        console.log("request sent to backend")
         const data = await response.json(); //convert the HTTP file received to JSON file
         console.log("response received from backend", data);
         if (response.ok) { //if the response is received
@@ -64,17 +66,32 @@ function getLocation() {
     console.log("Calling get location");
 
     if (navigator.geolocation) {//check if geolocation is supported
-        console.log("accessed geolocation");
+       
         navigator.geolocation.getCurrentPosition(position => {
             const lat = position.coords.latitude;//get the latitude
             const lon = position.coords.longitude;//get the longitude
-
+            console.log("accessed geolocation");
             fetchWeatherFromBackend(lat, lon);
-        }, () => {
-            loadingElement,innerText = 'Unable to access your location.';
-        });
+        }, error => {  // Handle errors (e.g., access denied)
+            switch (error.code) {
+                case error.PERMISSION_DENIED:
+                    loadingElement.innerText = 'Location access denied. Please enable location services.';
+                    break;
+                case error.POSITION_UNAVAILABLE:
+                    loadingElement.innerText = 'Location information is unavailable.';
+                    break;
+                case error.TIMEOUT:
+                    loadingElement.innerText = 'The request to get your location timed out.';
+                    break;
+                default:
+                    loadingElement.innerText = 'An unknown error occurred while fetching location.';
+            }
+            weatherDisplay.style.display = 'none';  // Hide the weather display when there is an error
+        }
+        );
     } else {
-        loadingElement.innerText = 'Geolocation is not supported.';
+        loadingElement.innerText = 'Geolocation is not supported by your browser.';
+        weatherDisplay.style.display = 'none';  // Hide the weather display when geolocation is not supported
     }
 }
 
