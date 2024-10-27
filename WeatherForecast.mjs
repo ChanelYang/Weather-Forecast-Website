@@ -1,3 +1,4 @@
+//code by Chanel Yang. 2024.10.25
 //References to HTML elements
 const locationElement = document.getElementById('location');
 const temperatureElement = document.getElementById('temperature');
