@@ -10,16 +10,16 @@ const loadingElement = document.getElementById('loadingWeather');
 //function to fetch weather data from python backend
 async function fetchWeatherFromBackend(lat, lon) {
     console.log("Calling fetch Weather from back end");
-    const url = 'http://localhost:5000/location';//need to add weather information backend url here
+    const url = 'http://localhost:5000/location';//backend URL
     
     try {
         const response = await fetch(url, {
-            method: 'POST',
+            method: 'POST',//the request uses the POST HTTP method
             headers: {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({latitude: lat, longitude: lon})
-        }); //fetch response from backend
+        }); //initiate a fetch request to the URL
         const data = await response.json(); //convert the HTTP file received to JSON file
         console.log("response received from backend", data);
         if (response.ok) { //if the response is received
@@ -62,11 +62,12 @@ function displayWarning(warning) {
 //main function. get location and fetch data
 function getLocation() {
     console.log("Calling get location");
-    if (navigator.geolocation) {
+
+    if (navigator.geolocation) {//check if geolocation is supported
         console.log("accessed geolocation");
         navigator.geolocation.getCurrentPosition(position => {
-            const lat = position.coords.latitude;
-            const lon = position.coords.longitude;
+            const lat = position.coords.latitude;//get the latitude
+            const lon = position.coords.longitude;//get the longitude
 
             fetchWeatherFromBackend(lat, lon);
         }, () => {
@@ -77,4 +78,5 @@ function getLocation() {
     }
 }
 
+//call getlocation function on page load
 getLocation();
