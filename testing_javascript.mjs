@@ -1,8 +1,6 @@
 
 import { fetchWeatherFromBackend } from "./WeatherForecast.mjs";
-import { displayWeather } from "./WeatherForecast.mjs";
-import { displayWarning } from "./WeatherForecast.mjs";
-//dummy data
+
 const mockWeatherData = {
     name: "New York",
     sys: { country: "US" },
@@ -15,4 +13,4 @@ const mockWeatherData = {
 //displayWeather(mockWeatherData);
 //displayWarning(mockWeatherData.warning);
 
-fetchWeatherFromBackend(51.23,12.333)
+fetchWeatherFromBackend(22.545702, 114.008351)

@@ -7,6 +7,7 @@ const warningElement = document.getElementById('warning');
 const weatherDisplay = document.getElementById('weatherDisplay');
 const loadingElement = document.getElementById('loadingWeather');
 
+
 //function to fetch weather data from python backend
 async function fetchWeatherFromBackend(lat, lon) {
     console.log("Calling fetch Weather from back end");
@@ -69,7 +70,8 @@ function getLocation() {
        
         navigator.geolocation.getCurrentPosition(position => {
             const lat = position.coords.latitude;//get the latitude
-            const lon = position.coords.longitude;//get the longitude
+            const lon = position.coords.longitude;
+            
             console.log("accessed geolocation");
             fetchWeatherFromBackend(lat, lon);
         }, error => {  // Handle errors (e.g., access denied)

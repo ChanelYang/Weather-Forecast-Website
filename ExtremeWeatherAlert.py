@@ -3,8 +3,7 @@ import requests
 from flask_cors import CORS
 
 app = Flask(__name__)
-CORS(app)
-
+CORS(app, resources={r"/location": {"origins": "http://127.0.0.1:5500"}})
 
 API_key = "8a691e21287b4229f68d9f12641eb5e3"
 
